@@ -7,7 +7,7 @@ function OnOffselect(idSelect, idOption){
 //Function for replace text from options to headline select
 function replace(idSelect, idOption, idOptions){
     let select = document.querySelector(idSelect+' p:first-of-type')
-    let option = document.querySelector('#'+idOption)
+    let option = document.querySelector('.'+idOption)
     select.innerHTML = option.innerHTML;
     OnOffselect(idSelect, idOptions);
 }
@@ -21,14 +21,14 @@ function firstReplace(idSelect, idOption){
 
 $('.select_body').each(function(){
     let selectBody = '#'+$(this).attr('id') //We write down Id select (It is necessary to distinguish them from each other)
-    firstReplace(selectBody+' .select', selectBody+' .options .option:first-of-type')//Aplying frist replace function
+    firstReplace(selectBody+' .select', selectBody+' .options .option0')//Aplying frist replace function
 
     $(selectBody + ' .select').click(function(){ //Set click on header custom select
         OnOffselect(selectBody + ' .select', selectBody + ' .options')//Aplying on or off function
     })
 
     $(selectBody + ' .options .option').click(function(){ //Set click on option
-        replace(selectBody + ' .select', $(this).attr('id'), selectBody + ' .options') //Aplying replace function
-        $(selectBody + ' select').prop('selectedIndex', this.getAttribute('id').replace(/[^\d]/g, '')) //We look at which element we have selected and select the same element in the usual select
+        replace(selectBody + ' .select', $(this).attr('class').replace('option ', ''), selectBody + ' .options') //Aplying replace function
+        $(selectBody + ' select').prop('selectedIndex', this.getAttribute('class').replace('option ', '').replace(/[^\d]/g, '')) //We look at which element we have selected and select the same element in the usual select
     })
 })
